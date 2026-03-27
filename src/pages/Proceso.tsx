@@ -13,7 +13,7 @@ import {
   CardHoverRevealContent,
   CardHoverRevealMain,
 } from "@/components/ui/reveal-on-hover";
-import { Badge } from "@/components/ui/badge";
+
 import projectReformas from "@/assets/project-reformas.png";
 import projectBarberia from "@/assets/project-barberia.png";
 
