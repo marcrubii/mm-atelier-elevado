@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Check, Plus, Minus } from "lucide-react";
+import { Check, Plus, Minus, Camera } from "lucide-react";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -59,6 +60,8 @@ const FAQItem = ({ q, a }: { q: string; a: string }) => {
 };
 
 const Inversion = () => {
+  const [addPhotos, setAddPhotos] = useState(false);
+
   return (
     <>
       {/* Header */}
@@ -67,28 +70,31 @@ const Inversion = () => {
           <AnimatedSection>
             <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Inversión</p>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground max-w-3xl">
-              Un modelo claro.
+              Transparencia total.
               <br />
               <span className="text-muted-foreground">Sin sorpresas.</span>
             </h1>
             <p className="mt-6 text-secondary-foreground text-base md:text-lg leading-relaxed max-w-2xl">
-              Trabajamos con un sistema sencillo y transparente: un pago por el diseño y desarrollo de tu web, y un pago anual para mantenerla al día.
+              Un modelo sencillo: un pago por tu web, un pago anual para mantenerla al día.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Pricing blocks */}
+      {/* Pricing cards */}
       <section className="pb-16 md:pb-24">
         <div className="container-premium">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Design & Dev */}
+            {/* Plan 1: Web personalizada */}
             <AnimatedSection delay={0.1}>
-              <div className="border border-border p-10 md:p-14 h-full flex flex-col">
+              <div className="border border-border p-10 md:p-14 h-full flex flex-col relative overflow-hidden group hover:border-primary/30 transition-colors duration-500">
                 <div className="line-accent mb-6" />
-                <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-2">Diseño y desarrollo</p>
-                <h3 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2">Pago único</h3>
-                <p className="text-sm text-muted-foreground mb-8">Inversión inicial por la creación completa de tu web.</p>
+                <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-2">Web personalizada</p>
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="font-heading text-4xl md:text-5xl font-bold text-foreground">125€</span>
+                  <span className="text-muted-foreground text-sm">/ desde</span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-8">Pago único por el diseño y desarrollo completo de tu web.</p>
                 <p className="text-secondary-foreground text-sm leading-relaxed mb-8">
                   Incluye reunión inicial, diseño a medida, desarrollo profesional, optimización para móvil, revisiones y publicación. Todo lo que necesitas para tener una web de nivel.
                 </p>
@@ -107,27 +113,39 @@ const Inversion = () => {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-8">
+                  <Link to="/contacto" className="btn-primary-premium w-full text-center block">Solicitar presupuesto</Link>
+                </div>
               </div>
             </AnimatedSection>
 
-            {/* Maintenance */}
+            {/* Plan 2: Web + Mantenimiento */}
             <AnimatedSection delay={0.2}>
-              <div className="border border-border p-10 md:p-14 h-full flex flex-col">
+              <div className="border border-primary/30 p-10 md:p-14 h-full flex flex-col relative overflow-hidden group">
+                {/* Recommended badge */}
+                <div className="absolute top-0 right-0">
+                  <div className="bg-primary text-primary-foreground font-heading text-[10px] tracking-widest uppercase px-4 py-1.5 font-semibold">
+                    Recomendado
+                  </div>
+                </div>
                 <div className="line-accent mb-6" />
-                <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-2">Mantenimiento</p>
-                <h3 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-2">Pago anual</h3>
-                <p className="text-sm text-muted-foreground mb-8">Para que tu web siga funcionando perfectamente.</p>
+                <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-2">Web + Mantenimiento</p>
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="font-heading text-4xl md:text-5xl font-bold text-foreground">150€</span>
+                  <span className="text-muted-foreground text-sm">/ desde</span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-8">Diseño, desarrollo y 3 meses de mantenimiento incluido.</p>
                 <p className="text-secondary-foreground text-sm leading-relaxed mb-8">
-                  Tu web necesita atención continua: actualizaciones técnicas, cambios de contenido, gestión del dominio y soporte ante cualquier duda o necesidad.
+                  Todo lo del plan anterior, más 3 meses de mantenimiento técnico, cambios menores de contenido, gestión del dominio y soporte continuo.
                 </p>
                 <ul className="space-y-3 mt-auto">
                   {[
-                    "Mantenimiento técnico y seguridad",
-                    "Actualizaciones periódicas",
+                    "Todo lo incluido en Web personalizada",
+                    "3 meses de mantenimiento técnico",
                     "Cambios menores de contenido",
                     "Gestión y renovación del dominio",
                     "Soporte por email",
-                    "Rendimiento y optimización",
+                    "Seguridad y rendimiento",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-secondary-foreground">
                       <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2} />
@@ -135,17 +153,62 @@ const Inversion = () => {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-8">
+                  <Link to="/contacto" className="btn-primary-premium w-full text-center block">Solicitar presupuesto</Link>
+                </div>
               </div>
             </AnimatedSection>
           </div>
 
-          <AnimatedSection delay={0.3} className="mt-12 text-center">
+          {/* Photography extra */}
+          <AnimatedSection delay={0.3} className="mt-8 max-w-5xl mx-auto">
+            <div
+              className={`border transition-colors duration-500 p-8 md:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 cursor-pointer ${
+                addPhotos ? "border-primary/40 bg-primary/5" : "border-border hover:border-primary/20"
+              }`}
+              onClick={() => setAddPhotos(!addPhotos)}
+            >
+              <div className="flex items-start gap-4">
+                <div className={`w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
+                  addPhotos ? "border-primary bg-primary/10" : "border-border"
+                }`}>
+                  <Camera className={`w-4 h-4 transition-colors duration-300 ${addPhotos ? "text-primary" : "text-muted-foreground"}`} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-3 mb-1">
+                    <h4 className="font-heading text-base font-semibold text-foreground">Fotografías profesionales</h4>
+                    <span className="font-heading text-xs tracking-wider uppercase text-primary bg-primary/10 px-2 py-0.5">Opcional</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Si tu negocio no dispone de imágenes, nos desplazamos y hacemos las fotografías necesarias.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 flex-shrink-0">
+                <span className="font-heading text-2xl font-bold text-foreground">+50€</span>
+                <div className={`w-5 h-5 rounded-sm border-2 flex items-center justify-center transition-all duration-300 ${
+                  addPhotos ? "border-primary bg-primary" : "border-border"
+                }`}>
+                  <AnimatePresence>
+                    {addPhotos && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                      >
+                        <Check className="w-3 h-3 text-primary-foreground" strokeWidth={3} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.4} className="mt-12 text-center">
             <p className="text-sm text-muted-foreground max-w-md mx-auto">
               ¿Quieres saber la inversión concreta para tu proyecto? Cuéntanos qué necesitas y te damos un presupuesto detallado.
             </p>
-            <div className="mt-6">
-              <Link to="/contacto" className="btn-primary-premium">Solicitar presupuesto</Link>
-            </div>
           </AnimatedSection>
         </div>
       </section>

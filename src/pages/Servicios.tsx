@@ -1,8 +1,44 @@
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
+
+const services = [
+  {
+    num: "01",
+    title: "Diseño visual a medida",
+    text: "Nada de plantillas ni soluciones genéricas. Diseñamos cada elemento pensando en tu marca, tu sector y tu cliente. El resultado es una web que no se parece a ninguna otra porque está hecha exclusivamente para ti.",
+    items: ["Identidad visual coherente", "Tipografía y paleta propias", "Composición con criterio"],
+  },
+  {
+    num: "02",
+    title: "Estructura clara y estratégica",
+    text: "Organizamos la información para que tu cliente encuentre lo que busca sin esfuerzo. Cada sección tiene un propósito, cada página está pensada para comunicar y convertir.",
+    items: ["Arquitectura de contenido", "Jerarquía visual definida", "Orientada a conversión"],
+  },
+  {
+    num: "03",
+    title: "Experiencia mobile-first",
+    text: "Tu web se verá y funcionará impecablemente en el móvil, que es donde la mayoría de tus clientes te encontrarán. Sin compromisos en calidad ni en velocidad.",
+    items: ["Responsive impecable", "Carga rápida", "Navegación intuitiva"],
+  },
+  {
+    num: "04",
+    title: "Enfoque profesional completo",
+    text: "Nos encargamos de todo: desde la estrategia inicial hasta la publicación. Tú solo tienes que contarnos qué hace tu negocio. Nosotros hacemos el resto.",
+    items: ["Acompañamiento integral", "Proceso transparente", "Entrega llave en mano"],
+  },
+];
 
 const Servicios = () => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: carouselRef,
+    offset: ["start start", "end end"],
+  });
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
+
   return (
     <>
       {/* Header */}
@@ -22,54 +58,49 @@ const Servicios = () => {
         </div>
       </section>
 
-      {/* Service detail — alternating layout */}
-      <section className="pb-16 md:pb-24">
-        <div className="container-premium space-y-20 md:space-y-32">
-          {[
-            {
-              title: "Diseño visual a medida",
-              text: "Nada de plantillas ni soluciones genéricas. Diseñamos cada elemento pensando en tu marca, tu sector y tu cliente. El resultado es una web que no se parece a ninguna otra porque está hecha exclusivamente para ti.",
-              items: ["Identidad visual coherente", "Tipografía y paleta propias", "Composición con criterio"],
-            },
-            {
-              title: "Estructura clara y estratégica",
-              text: "Organizamos la información para que tu cliente encuentre lo que busca sin esfuerzo. Cada sección tiene un propósito, cada página está pensada para comunicar y convertir.",
-              items: ["Arquitectura de contenido", "Jerarquía visual definida", "Orientada a conversión"],
-            },
-            {
-              title: "Experiencia mobile-first",
-              text: "Tu web se verá y funcionará impecablemente en el móvil, que es donde la mayoría de tus clientes te encontrarán. Sin compromisos en calidad ni en velocidad.",
-              items: ["Responsive impecable", "Carga rápida", "Navegación intuitiva"],
-            },
-            {
-              title: "Enfoque profesional completo",
-              text: "Nos encargamos de todo: desde la estrategia inicial hasta la publicación. Tú solo tienes que contarnos qué hace tu negocio. Nosotros hacemos el resto.",
-              items: ["Acompañamiento integral", "Proceso transparente", "Entrega llave en mano"],
-            },
-          ].map((service, i) => (
-            <AnimatedSection key={service.title} delay={0.1}>
-              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start ${i % 2 !== 0 ? "lg:direction-rtl" : ""}`}>
-                <div className={i % 2 !== 0 ? "lg:order-2" : ""}>
-                  <div className="line-accent mb-6" />
-                  <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">{service.title}</h3>
-                  <p className="text-secondary-foreground leading-relaxed">{service.text}</p>
-                  <ul className="mt-6 space-y-3">
-                    {service.items.map((item) => (
-                      <li key={item} className="flex items-center gap-3 text-sm text-secondary-foreground">
-                        <Check className="w-4 h-4 text-primary flex-shrink-0" strokeWidth={2} />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className={`h-64 md:h-80 bg-secondary rounded-sm border border-border flex items-center justify-center ${i % 2 !== 0 ? "lg:order-1" : ""}`}>
-                  <div className="w-16 h-16 rounded-full border border-border flex items-center justify-center">
-                    <span className="font-heading text-xl font-bold text-primary">0{i + 1}</span>
-                  </div>
-                </div>
+      {/* Horizontal scroll carousel — "efecto chupete" */}
+      <section ref={carouselRef} className="relative h-[300vh]">
+        <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+          {/* Progress bar */}
+          <div className="container-premium mb-8">
+            <div className="max-w-xs h-px bg-border relative overflow-hidden">
+              <motion.div
+                className="absolute inset-y-0 left-0 bg-primary origin-left"
+                style={{ scaleX: scrollYProgress }}
+              />
+            </div>
+          </div>
+
+          <motion.div
+            className="flex gap-6 md:gap-8 pl-6 md:pl-16 w-fit"
+            style={{ x }}
+          >
+            {services.map((service, i) => (
+              <div
+                key={service.num}
+                className="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[45vw] lg:w-[35vw] border border-border bg-card p-8 md:p-12 flex flex-col group hover:border-primary/30 transition-colors duration-500"
+              >
+                <span className="font-heading text-5xl md:text-6xl font-bold text-primary/15 group-hover:text-primary/40 transition-colors duration-500 mb-6">
+                  {service.num}
+                </span>
+                <div className="line-accent mb-6" />
+                <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-secondary-foreground leading-relaxed text-sm mb-8 flex-1">
+                  {service.text}
+                </p>
+                <ul className="space-y-3 mt-auto">
+                  {service.items.map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-sm text-secondary-foreground">
+                      <Check className="w-4 h-4 text-primary flex-shrink-0" strokeWidth={2} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </AnimatedSection>
-          ))}
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -86,60 +117,6 @@ const Servicios = () => {
                 Si tu negocio no dispone de fotografías profesionales, también podemos ayudarte con el material visual necesario para que la web esté a la altura. Nos desplazamos y nos ocupamos de todo.
               </p>
             </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Pricing / Investment */}
-      <section className="border-t border-border section-padding">
-        <div className="container-premium">
-          <AnimatedSection className="text-center mb-16">
-            <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Inversión</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
-              Transparencia total
-            </h2>
-            <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
-              Un modelo sencillo: un pago por tu web, un pago anual para mantenerla al día.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border max-w-4xl mx-auto">
-            <AnimatedSection delay={0.1} className="bg-background p-10 md:p-14">
-              <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-6">Diseño y desarrollo</p>
-              <h3 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">Pago único</h3>
-              <p className="text-secondary-foreground text-sm leading-relaxed mb-8">
-                Incluye todo el proceso: reunión inicial, diseño a medida, desarrollo, revisiones y publicación de tu web.
-              </p>
-              <ul className="space-y-3">
-                {["Diseño personalizado", "Desarrollo completo", "Responsive mobile-first", "Revisiones incluidas", "Publicación y puesta en marcha"].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-secondary-foreground">
-                    <Check className="w-4 h-4 text-primary flex-shrink-0" strokeWidth={2} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </AnimatedSection>
-            <AnimatedSection delay={0.2} className="bg-background p-10 md:p-14">
-              <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-6">Mantenimiento</p>
-              <h3 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">Pago anual</h3>
-              <p className="text-secondary-foreground text-sm leading-relaxed mb-8">
-                Tu web siempre al día. Incluye mantenimiento técnico, cambios menores y gestión del dominio.
-              </p>
-              <ul className="space-y-3">
-                {["Mantenimiento técnico", "Cambios y actualizaciones", "Gestión del dominio", "Soporte continuo", "Seguridad y rendimiento"].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-secondary-foreground">
-                    <Check className="w-4 h-4 text-primary flex-shrink-0" strokeWidth={2} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </AnimatedSection>
-          </div>
-
-          <AnimatedSection delay={0.3} className="mt-12 text-center">
-            <Link to="/inversion" className="inline-flex items-center gap-2 text-sm text-primary font-heading tracking-wide hover:gap-3 transition-all duration-300">
-              Ver detalles de inversión <ArrowRight className="w-4 h-4" />
-            </Link>
           </AnimatedSection>
         </div>
       </section>

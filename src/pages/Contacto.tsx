@@ -1,6 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Mail, MessageCircle, Linkedin, MapPin, Send } from "lucide-react";
+import MapLibreGL from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
+
+const BarcelonaMap = () => {
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<MapLibreGL.Map | null>(null);
+
+  useEffect(() => {
+    if (!mapContainer.current || mapRef.current) return;
+
+    const map = new MapLibreGL.Map({
+      container: mapContainer.current,
+      style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+      center: [2.1734, 41.3851],
+      zoom: 11,
+      attributionControl: false,
+      interactive: false,
+    });
+
+    mapRef.current = map;
+
+    map.on("load", () => {
+      new MapLibreGL.Marker({
+        color: "hsl(24, 85%, 55%)",
+      })
+        .setLngLat([2.1734, 41.3851])
+        .addTo(map);
+    });
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, []);
+
+  return (
+    <div
+      ref={mapContainer}
+      className="w-full h-[200px] rounded-sm opacity-70"
+    />
+  );
+};
 
 const Contacto = () => {
   const [formData, setFormData] = useState({ nombre: "", email: "", mensaje: "" });
@@ -8,7 +50,6 @@ const Contacto = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Future: connect to backend
     setSent(true);
   };
 
@@ -136,18 +177,9 @@ const Contacto = () => {
                   <p className="text-secondary-foreground text-sm">Barcelona, España</p>
                 </div>
 
-                {/* Map */}
-                <div className="mt-8 border border-border overflow-hidden">
-                  <iframe
-                    title="Barcelona"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95917.53005498727!2d2.0693762!3d41.3873974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49816718e30e5%3A0x44b0fb3d4f47660a!2sBarcelona!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses"
-                    width="100%"
-                    height="220"
-                    style={{ border: 0, filter: "grayscale(1) brightness(0.4) contrast(1.2)" }}
-                    allowFullScreen={false}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
+                {/* Map — subtle MapLibre dark map */}
+                <div className="mt-8 border border-border overflow-hidden rounded-sm">
+                  <BarcelonaMap />
                 </div>
               </div>
             </AnimatedSection>
