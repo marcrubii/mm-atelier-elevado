@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/reveal-on-hover";
 import { Badge } from "@/components/ui/badge";
 import projectReformas from "@/assets/project-reformas.png";
+import projectBarberia from "@/assets/project-barberia.png";
 
 const steps = [
   {
@@ -66,10 +67,15 @@ const PROJECTS = [
     id: "project-1",
     title: "M&M Reformas Integrales",
     description: "Web corporativa para empresa de reformas integrales en Barcelona. Diseño premium con enfoque en conversión y experiencia móvil.",
-    services: ["diseño", "desarrollo"],
-    type: "Reformas",
     imageUrl: projectReformas,
     href: "https://mm-reformas-integrales.lovable.app",
+  },
+  {
+    id: "project-2",
+    title: "Studio Barbería",
+    description: "Web para barbería de alto nivel. Estética oscura, elegante y con atención al detalle visual.",
+    imageUrl: projectBarberia,
+    href: "#",
   },
 ];
 
@@ -238,7 +244,7 @@ const Proceso = () => {
           <ScrollXCarouselContainer className="h-screen flex flex-col justify-center">
             <ScrollXCarouselWrap
               className="flex gap-8 px-8 md:px-16 [&>*:first-child]:ml-8"
-              xRange={["0%", "-20%"]}
+              xRange={["0%", "-40%"]}
             >
               {PROJECTS.map((project) => (
                 <a
@@ -257,16 +263,6 @@ const Proceso = () => {
                       />
                     </CardHoverRevealMain>
                     <CardHoverRevealContent className="p-6 md:p-8 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        <Badge variant="outline" className="text-xs border-primary/40 text-primary bg-primary/10">
-                          {project.type}
-                        </Badge>
-                        {project.services.map((service) => (
-                          <Badge key={service} variant="outline" className="text-xs border-border text-muted-foreground">
-                            {service}
-                          </Badge>
-                        ))}
-                      </div>
                       <h3 className="font-heading text-xl md:text-2xl font-bold text-white mb-2">
                         {project.title}
                       </h3>
