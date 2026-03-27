@@ -54,7 +54,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="mt-6 md:mt-8 text-base md:text-lg text-secondary-foreground leading-relaxed max-w-xl"
             >
-              Diseñamos webs personalizadas, modernas y pensadas para móvil. Un proceso claro, una ejecución profesional y un resultado que refleja quién eres de verdad.
+              Diseñamos webs personalizadas, modernas y funcionales. Un proceso claro, una ejecución profesional y un resultado que refleja quién eres de verdad.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
