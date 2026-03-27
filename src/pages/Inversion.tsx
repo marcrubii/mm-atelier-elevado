@@ -6,7 +6,7 @@ import { useState } from "react";
 const faqs = [
   {
     q: "¿Cuánto suele tardar una web?",
-    a: "Depende de la complejidad del proyecto, pero la mayoría de las webs se completan en un plazo de 3 a 6 semanas. Te damos una estimación concreta tras la primera conversación.",
+    a: "Depende de la complejidad del proyecto, pero la mayoría de las webs se completan en un plazo máximo de 5 días laborables. Te damos una estimación concreta tras la primera conversación.",
   },
   {
     q: "¿Puedo pedir cambios durante el proceso?",
@@ -17,8 +17,8 @@ const faqs = [
     a: "Sí. Todas nuestras webs se diseñan con un enfoque mobile-first. La experiencia en smartphone es igual de cuidada que en escritorio.",
   },
   {
-    q: "¿Qué incluye el mantenimiento anual?",
-    a: "Mantenimiento técnico, actualizaciones de seguridad, cambios menores de contenido, gestión del dominio y soporte continuo para cualquier duda o necesidad.",
+    q: "¿Qué incluye el mantenimiento mensual?",
+    a: "Mantenimiento técnico, cambios menores de contenido, gestión del dominio y soporte continuo para cualquier duda o necesidad.",
   },
   {
     q: "¿Y si todavía no tengo imágenes?",
