@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Mail, MessageCircle, Linkedin, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
 import MapLibreGL from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
@@ -17,7 +17,7 @@ const BarcelonaMap = () => {
       center: [2.1734, 41.3851],
       zoom: 11,
       attributionControl: false,
-      interactive: false,
+      interactive: true,
     });
 
     mapRef.current = map;
@@ -150,23 +150,6 @@ const Contacto = () => {
                   </a>
                 </div>
 
-                {/* WhatsApp — future ready */}
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <MessageCircle className="w-4 h-4 text-primary" strokeWidth={1.5} />
-                    <span className="font-heading text-xs tracking-widest uppercase text-muted-foreground">WhatsApp</span>
-                  </div>
-                  <p className="text-muted-foreground text-sm">Próximamente disponible</p>
-                </div>
-
-                {/* LinkedIn — future ready */}
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <Linkedin className="w-4 h-4 text-primary" strokeWidth={1.5} />
-                    <span className="font-heading text-xs tracking-widest uppercase text-muted-foreground">LinkedIn</span>
-                  </div>
-                  <p className="text-muted-foreground text-sm">Próximamente disponible</p>
-                </div>
 
                 {/* Location */}
                 <div>
