@@ -2,6 +2,19 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
+import {
+  ScrollXCarousel,
+  ScrollXCarouselContainer,
+  ScrollXCarouselProgress,
+  ScrollXCarouselWrap,
+} from "@/components/ui/scroll-x-carousel";
+import {
+  CardHoverReveal,
+  CardHoverRevealContent,
+  CardHoverRevealMain,
+} from "@/components/ui/reveal-on-hover";
+import { Badge } from "@/components/ui/badge";
+import projectReformas from "@/assets/project-reformas.png";
 
 const steps = [
   {
@@ -45,6 +58,18 @@ const steps = [
     title: "Mantenimiento continuo",
     desc: "Con el plan anual, tu web se mantiene actualizada, segura y al día. Incluye cambios menores, soporte técnico y gestión del dominio.",
     detail: "Actualizaciones · Soporte · Dominio",
+  },
+];
+
+const PROJECTS = [
+  {
+    id: "project-1",
+    title: "M&M Reformas Integrales",
+    description: "Web corporativa para empresa de reformas integrales en Barcelona. Diseño premium con enfoque en conversión y experiencia móvil.",
+    services: ["diseño", "desarrollo"],
+    type: "Reformas",
+    imageUrl: projectReformas,
+    href: "https://mm-reformas-integrales.lovable.app",
   },
 ];
 
@@ -198,19 +223,66 @@ const Proceso = () => {
         </div>
       </section>
 
-      {/* Photography note */}
+      {/* Portfolio showcase — horizontal scroll carousel */}
       <section className="border-t border-border section-padding">
-        <div className="container-premium">
-          <AnimatedSection className="max-w-2xl">
-            <div className="line-accent mb-6" />
-            <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-4">
-              ¿No tienes imágenes? No es un problema.
-            </h3>
-            <p className="text-secondary-foreground leading-relaxed">
-              Cuando el proyecto lo necesita y el negocio no dispone de imágenes adecuadas, también podemos encargarnos de ese apoyo visual. Nos desplazamos, hacemos las fotografías y las integramos directamente en tu web.
-            </p>
+        <div className="container-premium mb-12">
+          <AnimatedSection>
+            <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Proyectos</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
+              Algunos de nuestros trabajos
+            </h2>
           </AnimatedSection>
         </div>
+
+        <ScrollXCarousel className="h-[200vh]">
+          <ScrollXCarouselContainer className="h-screen flex flex-col justify-center">
+            <ScrollXCarouselWrap
+              className="flex gap-8 px-8 md:px-16 [&>*:first-child]:ml-8"
+              xRange={["0%", "-20%"]}
+            >
+              {PROJECTS.map((project) => (
+                <a
+                  key={project.id}
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block flex-shrink-0 w-[85vw] md:w-[60vw] lg:w-[50vw]"
+                >
+                  <CardHoverReveal className="rounded-lg h-[50vh] md:h-[60vh] cursor-pointer">
+                    <CardHoverRevealMain>
+                      <img
+                        src={project.imageUrl}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </CardHoverRevealMain>
+                    <CardHoverRevealContent className="p-6 md:p-8 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        <Badge variant="outline" className="text-xs border-primary/40 text-primary bg-primary/10">
+                          {project.type}
+                        </Badge>
+                        {project.services.map((service) => (
+                          <Badge key={service} variant="outline" className="text-xs border-border text-muted-foreground">
+                            {service}
+                          </Badge>
+                        ))}
+                      </div>
+                      <h3 className="font-heading text-xl md:text-2xl font-bold text-white mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-white/70 text-sm leading-relaxed max-w-lg">
+                        {project.description}
+                      </p>
+                    </CardHoverRevealContent>
+                  </CardHoverReveal>
+                </a>
+              ))}
+            </ScrollXCarouselWrap>
+            <div className="container-premium mt-8">
+              <ScrollXCarouselProgress />
+            </div>
+          </ScrollXCarouselContainer>
+        </ScrollXCarousel>
       </section>
 
       {/* CTA */}

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Check, Plus, Minus, Camera } from "lucide-react";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -60,8 +59,6 @@ const FAQItem = ({ q, a }: { q: string; a: string }) => {
 };
 
 const Inversion = () => {
-  const [addPhotos, setAddPhotos] = useState(false);
-
   return (
     <>
       {/* Header */}
@@ -162,17 +159,10 @@ const Inversion = () => {
 
           {/* Photography extra */}
           <AnimatedSection delay={0.3} className="mt-8 max-w-5xl mx-auto">
-            <div
-              className={`border transition-colors duration-500 p-8 md:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 cursor-pointer ${
-                addPhotos ? "border-primary/40 bg-primary/5" : "border-border hover:border-primary/20"
-              }`}
-              onClick={() => setAddPhotos(!addPhotos)}
-            >
+            <div className="border border-border hover:border-primary/20 transition-colors duration-500 p-8 md:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div className="flex items-start gap-4">
-                <div className={`w-10 h-10 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
-                  addPhotos ? "border-primary bg-primary/10" : "border-border"
-                }`}>
-                  <Camera className={`w-4 h-4 transition-colors duration-300 ${addPhotos ? "text-primary" : "text-muted-foreground"}`} />
+                <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center flex-shrink-0">
+                  <Camera className="w-4 h-4 text-muted-foreground" />
                 </div>
                 <div>
                   <div className="flex items-center gap-3 mb-1">
@@ -184,24 +174,7 @@ const Inversion = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-4 flex-shrink-0">
-                <span className="font-heading text-2xl font-bold text-foreground">+50€</span>
-                <div className={`w-5 h-5 rounded-sm border-2 flex items-center justify-center transition-all duration-300 ${
-                  addPhotos ? "border-primary bg-primary" : "border-border"
-                }`}>
-                  <AnimatePresence>
-                    {addPhotos && (
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                      >
-                        <Check className="w-3 h-3 text-primary-foreground" strokeWidth={3} />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </div>
+              <span className="font-heading text-2xl font-bold text-foreground flex-shrink-0">+50€</span>
             </div>
           </AnimatedSection>
 
