@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const steps = [
@@ -6,40 +8,49 @@ const steps = [
     num: "01",
     title: "Entendemos tu negocio",
     desc: "Hablamos contigo para conocer a fondo qué haces, a quién te diriges y qué necesitas transmitir. Esta conversación marca la dirección de todo el proyecto.",
+    detail: "Reunión inicial · Análisis del sector · Objetivos claros",
   },
   {
     num: "02",
     title: "Definimos la estructura",
     desc: "Organizamos la información de tu web: qué páginas, qué secciones, qué orden. Todo con un enfoque estratégico para que tu cliente encuentre lo que busca sin esfuerzo.",
+    detail: "Arquitectura web · Flujo de usuario · Estrategia de contenido",
   },
   {
     num: "03",
     title: "Diseñamos la propuesta visual",
     desc: "Creamos un diseño a medida que refleje tu marca: colores, tipografía, composición. Un resultado visual con criterio, coherente y profesional.",
+    detail: "Identidad visual · Paleta y tipografía · Composición",
   },
   {
     num: "04",
     title: "Desarrollamos la web",
     desc: "Construimos cada página con atención al detalle. Navegación fluida, carga rápida, experiencia impecable en móvil y escritorio.",
+    detail: "Código limpio · Mobile-first · Rendimiento",
   },
   {
     num: "05",
     title: "Revisamos contigo",
     desc: "Te presentamos el resultado y ajustamos los últimos detalles juntos. Tu opinión importa: no publicamos nada que no te convenza al cien por cien.",
+    detail: "Feedback · Ajustes · Aprobación final",
   },
   {
     num: "06",
     title: "Publicamos y entregamos",
     desc: "Dejamos tu web lista, online y funcionando. Nos aseguramos de que todo esté perfecto antes de dar el proyecto por terminado.",
+    detail: "Publicación · Verificación · Entrega completa",
   },
   {
     num: "07",
     title: "Mantenimiento continuo",
     desc: "Con el plan anual, tu web se mantiene actualizada, segura y al día. Incluye cambios menores, soporte técnico y gestión del dominio.",
+    detail: "Actualizaciones · Soporte · Dominio",
   },
 ];
 
 const Proceso = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
   return (
     <>
       {/* Header */}
@@ -59,38 +70,131 @@ const Proceso = () => {
         </div>
       </section>
 
-      {/* Process steps — editorial layout */}
+      {/* Interactive process — tabbed/interactive layout */}
       <section className="pb-16 md:pb-24">
         <div className="container-premium">
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-border to-transparent hidden md:block" />
-
-            <div className="space-y-0">
-              {steps.map((step, i) => (
-                <AnimatedSection key={step.num} delay={i * 0.08} direction={i % 2 === 0 ? "left" : "up"}>
-                  <div className="grid grid-cols-1 md:grid-cols-[80px_1fr] gap-6 md:gap-12 py-12 md:py-16 border-b border-border last:border-b-0 group">
-                    {/* Number */}
-                    <div className="relative flex items-start">
-                      <span className="font-heading text-3xl md:text-4xl font-bold text-primary/20 group-hover:text-primary/60 transition-colors duration-500">
+          <AnimatedSection>
+            {/* Desktop: side-by-side interactive layout */}
+            <div className="hidden md:grid grid-cols-[320px_1fr] lg:grid-cols-[380px_1fr] gap-12 lg:gap-20">
+              {/* Left: step selector */}
+              <div className="space-y-0 border-l border-border">
+                {steps.map((step, i) => (
+                  <button
+                    key={step.num}
+                    onClick={() => setActiveStep(i)}
+                    className={`w-full text-left pl-6 pr-4 py-5 border-l-2 -ml-px transition-all duration-400 group ${
+                      activeStep === i
+                        ? "border-l-primary bg-primary/5"
+                        : "border-l-transparent hover:border-l-border hover:bg-secondary/30"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className={`font-heading text-sm font-bold transition-colors duration-300 ${
+                        activeStep === i ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                      }`}>
                         {step.num}
                       </span>
-                      {/* Dot on timeline */}
-                      <div className="hidden md:block absolute left-8 top-3 w-2 h-2 rounded-full bg-primary/40 group-hover:bg-primary transition-colors duration-500 -translate-x-1/2" />
-                    </div>
-
-                    {/* Content */}
-                    <div className="max-w-xl">
-                      <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                      <span className={`font-heading text-sm font-medium transition-colors duration-300 ${
+                        activeStep === i ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+                      }`}>
                         {step.title}
-                      </h3>
-                      <p className="text-secondary-foreground leading-relaxed">{step.desc}</p>
+                      </span>
                     </div>
-                  </div>
-                </AnimatedSection>
+                  </button>
+                ))}
+              </div>
+
+              {/* Right: step content */}
+              <div className="flex items-start pt-5">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeStep}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="max-w-lg"
+                  >
+                    <span className="font-heading text-6xl lg:text-8xl font-bold text-primary/10 block mb-4">
+                      {steps[activeStep].num}
+                    </span>
+                    <h3 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-4">
+                      {steps[activeStep].title}
+                    </h3>
+                    <p className="text-secondary-foreground leading-relaxed mb-6">
+                      {steps[activeStep].desc}
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      {steps[activeStep].detail.split(" · ").map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1.5 text-xs font-heading tracking-wider uppercase text-primary/80 border border-primary/20 bg-primary/5"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Mobile: accordion-style */}
+            <div className="md:hidden space-y-0">
+              {steps.map((step, i) => (
+                <div key={step.num} className="border-b border-border">
+                  <button
+                    onClick={() => setActiveStep(activeStep === i ? -1 : i)}
+                    className="w-full flex items-center gap-4 py-6 text-left group"
+                  >
+                    <span className={`font-heading text-lg font-bold transition-colors duration-300 ${
+                      activeStep === i ? "text-primary" : "text-muted-foreground"
+                    }`}>
+                      {step.num}
+                    </span>
+                    <span className={`font-heading text-base font-medium transition-colors duration-300 flex-1 ${
+                      activeStep === i ? "text-foreground" : "text-muted-foreground"
+                    }`}>
+                      {step.title}
+                    </span>
+                    <motion.div
+                      animate={{ rotate: activeStep === i ? 45 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <span className="text-primary text-xl">+</span>
+                    </motion.div>
+                  </button>
+                  <AnimatePresence>
+                    {activeStep === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pb-6 pl-10">
+                          <p className="text-secondary-foreground leading-relaxed text-sm mb-4">
+                            {step.desc}
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {step.detail.split(" · ").map((tag) => (
+                              <span
+                                key={tag}
+                                className="px-2.5 py-1 text-[10px] font-heading tracking-wider uppercase text-primary/80 border border-primary/20 bg-primary/5"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               ))}
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
