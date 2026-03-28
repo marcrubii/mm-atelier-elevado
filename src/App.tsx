@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useState, useCallback } from "react";
 import Layout from "@/components/Layout";
 import LoadingScreen from "@/components/LoadingScreen";
+import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Servicios from "./pages/Servicios";
 import Proceso from "./pages/Proceso";
@@ -25,6 +26,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         {loading && <LoadingScreen onComplete={handleLoadComplete} />}
+        <ScrollToTop />
         <Layout>
           <Routes>
             <Route path="/" element={<Index />} />
