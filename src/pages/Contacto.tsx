@@ -46,12 +46,30 @@ const BarcelonaMap = () => {
 };
 
 const Contacto = () => {
-  const [formData, setFormData] = useState({ nombre: "", email: "", mensaje: "" });
-  const [sent, setSent] = useState(false);
+  const [formData, setFormData] = useState({ nombre: "", email: "", mensaje: "", website: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    if (!formData.email.trim() || !formData.mensaje.trim()) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.mymstudio.net/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.nombre,
+          email: formData.email,
+          message: formData.mensaje,
+          website: formData.website,
+        }),
+      });
+      if (!res.ok) throw new Error("API error");
+      setStatus("sent");
+      setFormData({ nombre: "", email: "", mensaje: "", website: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
