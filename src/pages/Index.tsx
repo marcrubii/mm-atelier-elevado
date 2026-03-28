@@ -143,7 +143,7 @@ const Index = () => {
                   transition={{ duration: 0.6, delay: 0.5 }}
                   className="mt-6 text-secondary-foreground leading-relaxed text-base md:text-lg"
                 >
-                  En M&M creamos webs a medida que transmiten exactamente lo que tu negocio es: serio, profesional y de confianza. Con un diseño actual, una estructura pensada y una experiencia impecable en cualquier dispositivo.
+                  En M&M Studio creamos webs a medida que transmiten exactamente lo que tu negocio es: serio, profesional y de confianza. Con un diseño actual, una estructura pensada y una experiencia impecable en cualquier dispositivo.
                 </motion.p>
               </AnimatedSection>
             </div>
@@ -171,7 +171,7 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               className="font-heading text-xs uppercase text-primary mb-4"
             >
-              Por qué M&M
+              Por qué M&M Studio
             </motion.p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
               Lo que nos define
