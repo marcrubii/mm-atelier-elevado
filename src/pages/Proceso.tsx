@@ -16,6 +16,7 @@ import {
 
 import projectReformas from "@/assets/project-reformas.png";
 import projectBarberia from "@/assets/project-barberia.png";
+import projectRestaurante from "@/assets/project-restaurante.png";
 
 const steps = [
   {
@@ -75,6 +76,13 @@ const PROJECTS = [
     title: "Studio Barbería",
     description: "Web para barbería de alto nivel. Estética oscura, elegante y con atención al detalle visual.",
     imageUrl: projectBarberia,
+    href: "#",
+  },
+  {
+    id: "project-3",
+    title: "Alma Restaurante",
+    description: "Web para restaurante con ambiente íntimo. Diseño cálido, fotografía envolvente y reservas integradas.",
+    imageUrl: projectRestaurante,
     href: "#",
   },
 ];
@@ -244,7 +252,7 @@ const Proceso = () => {
           <ScrollXCarouselContainer className="h-screen flex flex-col justify-center">
             <ScrollXCarouselWrap
               className="flex gap-8 px-8 md:px-16 [&>*:first-child]:ml-8"
-              xRange={["0%", "-40%"]}
+              xRange={["0%", "-60%"]}
             >
               {PROJECTS.map((project) => (
                 <a
