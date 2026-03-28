@@ -26,6 +26,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         {loading && <LoadingScreen onComplete={handleLoadComplete} />}
+        <ScrollToTop />
         <Layout>
           <Routes>
             <Route path="/" element={<Index />} />
