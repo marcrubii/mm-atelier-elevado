@@ -38,7 +38,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       >
         <div className="container-premium flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="font-heading text-2xl md:text-3xl font-bold tracking-tight text-foreground hover:text-primary transition-colors duration-300">
-            M&M <span className="font-light text-base md:text-lg text-muted-foreground">Studio</span>
+            M&M <span className="font-normal text-lg md:text-xl text-foreground/70">Studio</span>
           </Link>
 
           {/* Desktop nav */}
@@ -126,7 +126,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <div className="container-premium py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
             <div>
-              <span className="font-heading text-2xl font-bold tracking-tight text-foreground">M&M <span className="font-light text-base text-muted-foreground">Studio</span></span>
+              <span className="font-heading text-2xl font-bold tracking-tight text-foreground">M&M <span className="font-normal text-lg text-foreground/70">Studio</span></span>
               <p className="mt-4 text-muted-foreground text-sm leading-relaxed max-w-xs">
                 Diseño web con criterio para negocios que quieren proyectar la profesionalidad que ya tienen.
               </p>
