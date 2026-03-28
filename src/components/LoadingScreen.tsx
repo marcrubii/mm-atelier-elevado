@@ -27,7 +27,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
             transition={{ duration: 0.5 }}
             className="font-heading text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-10"
           >
-            M&M
+            M&M <span className="font-light text-muted-foreground text-xl md:text-2xl">Studio</span>
           </motion.span>
           <div className="flex gap-2 items-center justify-center">
             {[0, 1, 2].map((index) => (

@@ -42,19 +42,55 @@ const Servicios = () => {
   return (
     <>
       {/* Header */}
-      <section className="pt-32 md:pt-40 pb-8 md:pb-10">
-        <div className="container-premium">
-          <AnimatedSection>
-            <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Servicios</p>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground max-w-3xl">
-              Diseño web con criterio.
-              <br />
-              <span className="text-muted-foreground">Sin atajos.</span>
-            </h1>
-            <p className="mt-6 text-secondary-foreground text-base md:text-lg leading-relaxed max-w-2xl">
-              Creamos webs que hacen que tu negocio se vea exactamente como es: profesional, fiable y actual. Cada proyecto es único porque cada negocio lo es.
-            </p>
-          </AnimatedSection>
+      <section className="pt-32 md:pt-40 pb-8 md:pb-10 relative overflow-hidden">
+        {/* Ambient glow */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 0.25, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-[hsl(var(--orange-subtle))] blur-[150px] pointer-events-none"
+        />
+
+        <div className="container-premium relative z-10">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="h-px bg-gradient-to-r from-primary/60 via-primary/20 to-transparent mb-10 max-w-md"
+          />
+          <motion.p
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4"
+          >
+            Servicios
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground max-w-3xl"
+          >
+            Diseño web con criterio.
+            <br />
+            <motion.span
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="text-muted-foreground inline-block"
+            >
+              Sin atajos.
+            </motion.span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="mt-6 text-secondary-foreground text-base md:text-lg leading-relaxed max-w-2xl"
+          >
+            Creamos webs que hacen que tu negocio se vea exactamente como es: profesional, fiable y actual. Cada proyecto es único porque cada negocio lo es.
+          </motion.p>
         </div>
       </section>
 
