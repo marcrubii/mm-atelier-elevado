@@ -138,20 +138,31 @@ const Contacto = () => {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              {sent ? (
+              {status === "sent" ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
                   className="border border-primary/30 bg-primary/5 p-10 md:p-14"
                 >
-                  <h3 className="font-heading text-2xl font-bold text-foreground mb-3">Mensaje recibido</h3>
+                  <h3 className="font-heading text-2xl font-bold text-foreground mb-3">Mensaje enviado correctamente</h3>
                   <p className="text-secondary-foreground">
                     Gracias por contactarnos. Te responderemos lo antes posible.
                   </p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Honeypot */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                    className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
                   {[
                     { label: "Nombre", type: "text", name: "nombre" as const, placeholder: "Tu nombre o el de tu empresa" },
                     { label: "Email", type: "email", name: "email" as const, placeholder: "tu@email.com" },
@@ -168,7 +179,7 @@ const Contacto = () => {
                       </label>
                       <input
                         type={field.type}
-                        required
+                        required={field.name === "email"}
                         value={formData[field.name]}
                         onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
                         className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none transition-colors duration-300"
@@ -194,13 +205,17 @@ const Contacto = () => {
                       placeholder="¿Qué tipo de negocio tienes? ¿Qué necesitas?"
                     />
                   </motion.div>
+                  {status === "error" && (
+                    <p className="text-sm text-red-400">Hubo un error al enviar el mensaje</p>
+                  )}
                   <motion.button
                     type="submit"
-                    className="btn-primary-premium inline-flex items-center gap-2"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
+                    disabled={status === "sending"}
+                    className="btn-primary-premium inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    whileHover={status !== "sending" ? { scale: 1.03 } : {}}
+                    whileTap={status !== "sending" ? { scale: 0.97 } : {}}
                   >
-                    Enviar mensaje <Send className="w-4 h-4" />
+                    {status === "sending" ? "Enviando..." : "Enviar mensaje"} <Send className="w-4 h-4" />
                   </motion.button>
                 </form>
               )}
