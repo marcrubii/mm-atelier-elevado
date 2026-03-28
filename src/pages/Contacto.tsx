@@ -241,10 +241,10 @@ const Contacto = () => {
                     <span className="font-heading text-xs tracking-widest uppercase text-muted-foreground">Email</span>
                   </div>
                   <a
-                    href="mailto:mm.simplificagestion@gmail.com"
+                    href="mailto:contacto@mymstudio.net"
                     className="text-foreground hover:text-primary transition-colors duration-300 text-sm break-all"
                   >
-                    mm.simplificagestion@gmail.com
+                    contacto@mymstudio.net
                   </a>
                 </motion.div>
 

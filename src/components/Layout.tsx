@@ -147,10 +147,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div>
               <h4 className="font-heading text-xs tracking-widest uppercase text-muted-foreground mb-4">Contacto</h4>
               <a
-                href="mailto:mm.simplificagestion@gmail.com"
+                href="mailto:contacto@mymstudio.net"
                 className="text-sm text-secondary-foreground hover:text-primary transition-colors duration-300 break-all"
               >
-                mm.simplificagestion@gmail.com
+                contacto@mymstudio.net
               </a>
               <p className="mt-4 text-sm text-muted-foreground">Barcelona, España</p>
             </div>
