@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import AnimatedSection from "@/components/AnimatedSection";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import {
   ScrollXCarousel,
   ScrollXCarouselContainer,
@@ -89,44 +89,123 @@ const PROJECTS = [
 
 const Proceso = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const heroRef = useRef(null);
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroOpacity = useTransform(heroScroll, [0, 1], [1, 0]);
+  const heroScale = useTransform(heroScroll, [0, 1], [1, 0.95]);
 
   return (
     <>
-      {/* Header */}
-      <section className="pt-32 md:pt-40 pb-16 md:pb-20">
-        <div className="container-premium">
-          <AnimatedSection>
-            <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Proceso</p>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground max-w-3xl">
-              Claro, ordenado
-              <br />
-              <span className="text-muted-foreground">y sin sorpresas.</span>
-            </h1>
-            <p className="mt-6 text-secondary-foreground text-base md:text-lg leading-relaxed max-w-2xl">
-              Trabajar con nosotros es sencillo. Sabes en todo momento en qué fase está tu proyecto, qué necesitamos de ti y cuándo tendrás el resultado.
-            </p>
-          </AnimatedSection>
+      {/* Header with parallax */}
+      <motion.section
+        ref={heroRef}
+        style={{ opacity: heroOpacity, scale: heroScale }}
+        className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden"
+      >
+        {/* Animated grid lines background */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(7)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute top-0 bottom-0 w-px bg-border/30"
+              style={{ left: `${(i + 1) * 12.5}%` }}
+              initial={{ scaleY: 0, originY: 0 }}
+              animate={{ scaleY: 1 }}
+              transition={{ duration: 1.2, delay: 0.1 * i, ease: [0.22, 1, 0.36, 1] }}
+            />
+          ))}
         </div>
-      </section>
 
-      {/* Interactive process — tabbed/interactive layout */}
+        <div className="container-premium relative">
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: "0em" }}
+            animate={{ opacity: 1, letterSpacing: "0.3em" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="font-heading text-xs uppercase text-primary mb-4"
+          >
+            Proceso
+          </motion.p>
+
+          <div className="overflow-hidden">
+            <motion.h1
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground max-w-3xl"
+            >
+              Claro, ordenado
+            </motion.h1>
+          </div>
+          <div className="overflow-hidden">
+            <motion.h1
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-muted-foreground"
+            >
+              y sin sorpresas.
+            </motion.h1>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+            className="mt-6 text-secondary-foreground text-base md:text-lg leading-relaxed max-w-2xl"
+          >
+            Trabajar con nosotros es sencillo. Sabes en todo momento en qué fase está tu proyecto, qué necesitamos de ti y cuándo tendrás el resultado.
+          </motion.p>
+        </div>
+      </motion.section>
+
+      {/* Interactive process — timeline with unique reveal */}
       <section className="pb-16 md:pb-24">
         <div className="container-premium">
-          <AnimatedSection>
-            {/* Desktop: side-by-side interactive layout */}
-            <div className="hidden md:grid grid-cols-[320px_1fr] lg:grid-cols-[380px_1fr] gap-12 lg:gap-20">
-              {/* Left: step selector */}
-              <div className="space-y-0 border-l border-border">
+          {/* Desktop: side-by-side with animated connector */}
+          <div className="hidden md:grid grid-cols-[320px_1fr] lg:grid-cols-[380px_1fr] gap-12 lg:gap-20">
+            {/* Left: step selector with animated progress line */}
+            <div className="relative">
+              {/* Animated vertical progress */}
+              <div className="absolute left-0 top-0 bottom-0 w-px bg-border">
+                <motion.div
+                  className="absolute left-0 top-0 w-full bg-primary"
+                  animate={{
+                    height: `${((activeStep + 1) / steps.length) * 100}%`,
+                  }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </div>
+
+              <div className="space-y-0">
                 {steps.map((step, i) => (
-                  <button
+                  <motion.button
                     key={step.num}
                     onClick={() => setActiveStep(i)}
-                    className={`w-full text-left pl-6 pr-4 py-5 border-l-2 -ml-px transition-all duration-400 group ${
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.05 * i }}
+                    whileHover={{ x: 6 }}
+                    className={`w-full text-left pl-6 pr-4 py-5 -ml-px transition-colors duration-300 group relative ${
                       activeStep === i
-                        ? "border-l-primary bg-primary/5"
-                        : "border-l-transparent hover:border-l-border hover:bg-secondary/30"
+                        ? "bg-primary/5"
+                        : "hover:bg-secondary/30"
                     }`}
                   >
+                    {/* Active indicator dot */}
+                    <motion.div
+                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-primary"
+                      initial={false}
+                      animate={{
+                        scale: activeStep === i ? 1 : 0,
+                        opacity: activeStep === i ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    />
+
                     <div className="flex items-center gap-4">
                       <span className={`font-heading text-sm font-bold transition-colors duration-300 ${
                         activeStep === i ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
@@ -139,113 +218,133 @@ const Proceso = () => {
                         {step.title}
                       </span>
                     </div>
-                  </button>
+                  </motion.button>
                 ))}
               </div>
-
-              {/* Right: step content */}
-              <div className="flex items-start pt-5">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeStep}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="max-w-lg"
-                  >
-                    <span className="font-heading text-6xl lg:text-8xl font-bold text-primary/10 block mb-4">
-                      {steps[activeStep].num}
-                    </span>
-                    <h3 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-4">
-                      {steps[activeStep].title}
-                    </h3>
-                    <p className="text-secondary-foreground leading-relaxed mb-6">
-                      {steps[activeStep].desc}
-                    </p>
-                    <div className="flex flex-wrap gap-3">
-                      {steps[activeStep].detail.split(" · ").map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1.5 text-xs font-heading tracking-wider uppercase text-primary/80 border border-primary/20 bg-primary/5"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
             </div>
 
-            {/* Mobile: accordion-style */}
-            <div className="md:hidden space-y-0">
-              {steps.map((step, i) => (
-                <div key={step.num} className="border-b border-border">
-                  <button
-                    onClick={() => setActiveStep(activeStep === i ? -1 : i)}
-                    className="w-full flex items-center gap-4 py-6 text-left group"
+            {/* Right: step content with unique clip-path reveal */}
+            <div className="flex items-start pt-5">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+                  animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
+                  exit={{ opacity: 0, clipPath: "inset(100% 0 0 0)" }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="max-w-lg"
+                >
+                  <motion.span
+                    className="font-heading text-6xl lg:text-8xl font-bold text-primary/10 block mb-4"
+                    initial={{ opacity: 0, scale: 1.3 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
                   >
-                    <span className={`font-heading text-lg font-bold transition-colors duration-300 ${
-                      activeStep === i ? "text-primary" : "text-muted-foreground"
-                    }`}>
-                      {step.num}
-                    </span>
-                    <span className={`font-heading text-base font-medium transition-colors duration-300 flex-1 ${
-                      activeStep === i ? "text-foreground" : "text-muted-foreground"
-                    }`}>
-                      {step.title}
-                    </span>
-                    <motion.div
-                      animate={{ rotate: activeStep === i ? 45 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <span className="text-primary text-xl">+</span>
-                    </motion.div>
-                  </button>
-                  <AnimatePresence>
-                    {activeStep === i && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
+                    {steps[activeStep].num}
+                  </motion.span>
+                  <h3 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-4">
+                    {steps[activeStep].title}
+                  </h3>
+                  <p className="text-secondary-foreground leading-relaxed mb-6">
+                    {steps[activeStep].desc}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {steps[activeStep].detail.split(" · ").map((tag, tagIdx) => (
+                      <motion.span
+                        key={tag}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: 0.3 + tagIdx * 0.1 }}
+                        className="px-3 py-1.5 text-xs font-heading tracking-wider uppercase text-primary/80 border border-primary/20 bg-primary/5"
                       >
-                        <div className="pb-6 pl-10">
-                          <p className="text-secondary-foreground leading-relaxed text-sm mb-4">
-                            {step.desc}
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {step.detail.split(" · ").map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-2.5 py-1 text-[10px] font-heading tracking-wider uppercase text-primary/80 border border-primary/20 bg-primary/5"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
-          </AnimatedSection>
+          </div>
+
+          {/* Mobile: accordion with horizontal slide */}
+          <div className="md:hidden space-y-0">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.num}
+                className="border-b border-border"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.05 * i }}
+              >
+                <button
+                  onClick={() => setActiveStep(activeStep === i ? -1 : i)}
+                  className="w-full flex items-center gap-4 py-6 text-left group"
+                >
+                  <span className={`font-heading text-lg font-bold transition-colors duration-300 ${
+                    activeStep === i ? "text-primary" : "text-muted-foreground"
+                  }`}>
+                    {step.num}
+                  </span>
+                  <span className={`font-heading text-base font-medium transition-colors duration-300 flex-1 ${
+                    activeStep === i ? "text-foreground" : "text-muted-foreground"
+                  }`}>
+                    {step.title}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: activeStep === i ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="text-primary text-xl">+</span>
+                  </motion.div>
+                </button>
+                <AnimatePresence>
+                  {activeStep === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-6 pl-10">
+                        <p className="text-secondary-foreground leading-relaxed text-sm mb-4">
+                          {step.desc}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {step.detail.split(" · ").map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2.5 py-1 text-[10px] font-heading tracking-wider uppercase text-primary/80 border border-primary/20 bg-primary/5"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Portfolio showcase — horizontal scroll carousel */}
+      {/* Portfolio showcase */}
       <section className="border-t border-border section-padding">
         <div className="container-premium mb-12">
-          <AnimatedSection>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Proyectos</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
               Algunos de nuestros trabajos
             </h2>
-          </AnimatedSection>
+          </motion.div>
         </div>
 
         <ScrollXCarousel className="h-[200vh]">
@@ -297,7 +396,12 @@ const Proceso = () => {
       {/* CTA */}
       <section className="border-t border-border section-padding">
         <div className="container-premium text-center">
-          <AnimatedSection>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
               ¿Te parece buen plan?
             </h2>
@@ -308,7 +412,7 @@ const Proceso = () => {
               <Link to="/contacto" className="btn-primary-premium">Solicitar proyecto</Link>
               <Link to="/inversion" className="btn-secondary-premium">Ver inversión</Link>
             </div>
-          </AnimatedSection>
+          </motion.div>
         </div>
       </section>
     </>
