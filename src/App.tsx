@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,18 +25,16 @@ const App = () => {
         <Toaster />
         <Sonner />
         {loading && <LoadingScreen onComplete={handleLoadComplete} />}
-        <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/servicios" element={<Servicios />} />
-              <Route path="/proceso" element={<Proceso />} />
-              <Route path="/inversion" element={<Inversion />} />
-              <Route path="/contacto" element={<Contacto />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
-        </BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/servicios" element={<Servicios />} />
+            <Route path="/proceso" element={<Proceso />} />
+            <Route path="/inversion" element={<Inversion />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Layout>
       </TooltipProvider>
     </QueryClientProvider>
   );
