@@ -254,33 +254,38 @@ const Proceso = () => {
               className="flex gap-8 px-8 md:px-16 [&>*:first-child]:ml-8"
               xRange={["0%", "-60%"]}
             >
-              {PROJECTS.map((project) => (
-                <a
-                  key={project.id}
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block flex-shrink-0 w-[85vw] md:w-[60vw] lg:w-[50vw]"
-                >
-                  <CardHoverReveal className="rounded-lg h-[50vh] md:h-[60vh] cursor-pointer">
-                    <CardHoverRevealMain>
-                      <img
-                        src={project.imageUrl}
-                        alt={project.title}
-                        className="w-full h-full object-cover object-top"
-                      />
-                    </CardHoverRevealMain>
-                    <CardHoverRevealContent className="p-6 md:p-8 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
-                      <h3 className="font-heading text-xl md:text-2xl font-bold text-white mb-2">
-                        {project.title}
-                      </h3>
-                      <p className="text-white/70 text-sm leading-relaxed max-w-lg">
-                        {project.description}
-                      </p>
-                    </CardHoverRevealContent>
-                  </CardHoverReveal>
-                </a>
-              ))}
+              {PROJECTS.map((project) => {
+                const hasLink = project.href && project.href !== "#";
+                const Wrapper = hasLink ? "a" : "div";
+                const wrapperProps = hasLink
+                  ? { href: project.href, target: "_blank" as const, rel: "noopener noreferrer" }
+                  : {};
+                return (
+                  <Wrapper
+                    key={project.id}
+                    {...wrapperProps}
+                    className="block flex-shrink-0 w-[85vw] md:w-[60vw] lg:w-[50vw]"
+                  >
+                    <CardHoverReveal className={`rounded-lg h-[50vh] md:h-[60vh] ${hasLink ? "cursor-pointer" : "cursor-default"}`}>
+                      <CardHoverRevealMain>
+                        <img
+                          src={project.imageUrl}
+                          alt={project.title}
+                          className="w-full h-full object-cover object-top"
+                        />
+                      </CardHoverRevealMain>
+                      <CardHoverRevealContent className="p-6 md:p-8 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                        <h3 className="font-heading text-xl md:text-2xl font-bold text-white mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-white/70 text-sm leading-relaxed max-w-lg">
+                          {project.description}
+                        </p>
+                      </CardHoverRevealContent>
+                    </CardHoverReveal>
+                  </Wrapper>
+                );
+              })}
             </ScrollXCarouselWrap>
             <div className="container-premium mt-8">
               <ScrollXCarouselProgress />
