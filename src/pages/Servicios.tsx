@@ -42,7 +42,7 @@ const Servicios = () => {
   return (
     <>
       {/* Header */}
-      <section className="pt-32 md:pt-40 pb-16 md:pb-20">
+      <section className="pt-32 md:pt-40 pb-8 md:pb-10">
         <div className="container-premium">
           <AnimatedSection>
             <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Servicios</p>
