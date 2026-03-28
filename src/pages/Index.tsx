@@ -89,34 +89,90 @@ const Index = () => {
       </section>
 
       {/* Problem / Value section */}
-      <section className="section-padding border-t border-border">
-        <div className="container-premium">
+      <section className="section-padding border-t border-border relative overflow-hidden">
+        {/* Animated background glow */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[hsl(var(--orange-subtle))] blur-[120px] opacity-30 pointer-events-none"
+        />
+
+        <div className="container-premium relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <AnimatedSection>
-              <div className="line-accent mb-6" />
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: 48 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="h-px bg-primary mb-6"
+              />
               <h2 className="font-heading text-3xl md:text-4xl font-bold leading-tight text-foreground">
                 Tu negocio funciona.
                 <br />
-                <span className="text-muted-foreground">Tu web, todavía no.</span>
+                <motion.span
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="text-muted-foreground inline-block"
+                >
+                  Tu web, todavía no.
+                </motion.span>
               </h2>
             </AnimatedSection>
-            <AnimatedSection delay={0.2}>
-              <p className="text-secondary-foreground leading-relaxed text-base md:text-lg">
-                Muchos negocios ofrecen un servicio excelente, pero su presencia online no lo refleja. Una web anticuada, poco profesional o directamente inexistente hace que pierdas credibilidad frente a clientes que ya te están buscando.
-              </p>
-              <p className="mt-6 text-secondary-foreground leading-relaxed text-base md:text-lg">
-                En M&M creamos webs a medida que transmiten exactamente lo que tu negocio es: serio, profesional y de confianza. Con un diseño actual, una estructura pensada y una experiencia impecable en cualquier dispositivo.
-              </p>
-            </AnimatedSection>
+            <div>
+              <AnimatedSection delay={0.2}>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="text-secondary-foreground leading-relaxed text-base md:text-lg"
+                >
+                  Muchos negocios ofrecen un servicio excelente, pero su presencia online no lo refleja. Una web anticuada, poco profesional o directamente inexistente hace que pierdas credibilidad frente a clientes que ya te están buscando.
+                </motion.p>
+              </AnimatedSection>
+              <AnimatedSection delay={0.4}>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="mt-6 text-secondary-foreground leading-relaxed text-base md:text-lg"
+                >
+                  En M&M creamos webs a medida que transmiten exactamente lo que tu negocio es: serio, profesional y de confianza. Con un diseño actual, una estructura pensada y una experiencia impecable en cualquier dispositivo.
+                </motion.p>
+              </AnimatedSection>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Credibility pillars */}
-      <section className="section-padding">
+      <section className="section-padding relative overflow-hidden">
+        {/* Subtle animated gradient line across top */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent origin-left"
+        />
+
         <div className="container-premium">
           <AnimatedSection className="text-center mb-16 md:mb-20">
-            <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Por qué M&M</p>
+            <motion.p
+              initial={{ opacity: 0, letterSpacing: "0.1em" }}
+              whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="font-heading text-xs uppercase text-primary mb-4"
+            >
+              Por qué M&M
+            </motion.p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
               Lo que nos define
             </h2>
@@ -130,15 +186,24 @@ const Index = () => {
               { icon: MessageSquare, title: "Trato directo", desc: "Comunicación clara, sin intermediarios. Sabes en todo momento en qué punto está tu proyecto." },
               { icon: ShieldCheck, title: "Acompañamiento real", desc: "No termina con la entrega. Mantenimiento, cambios y soporte anual para que tu web siga al día." },
             ].map((item, i) => (
-              <AnimatedSection
+              <motion.div
                 key={item.title}
-                delay={i * 0.1}
-                className="bg-background p-8 md:p-10 flex flex-col"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ backgroundColor: "hsl(var(--card))", y: -4 }}
+                className="bg-background p-8 md:p-10 flex flex-col transition-shadow duration-300 hover:shadow-[0_0_30px_hsl(var(--orange-subtle))]"
               >
-                <item.icon className="w-5 h-5 text-primary mb-6" strokeWidth={1.5} />
+                <motion.div
+                  whileHover={{ scale: 1.2, rotate: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <item.icon className="w-5 h-5 text-primary mb-6" strokeWidth={1.5} />
+                </motion.div>
                 <h3 className="font-heading text-sm font-semibold tracking-wide text-foreground mb-3">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </AnimatedSection>
+              </motion.div>
             ))}
           </div>
         </div>
