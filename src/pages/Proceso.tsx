@@ -69,7 +69,7 @@ const PROJECTS = [
     title: "M&M Reformas Integrales",
     description: "Web corporativa para empresa de reformas integrales en Barcelona. Diseño premium con enfoque en conversión y experiencia móvil.",
     imageUrl: projectReformas,
-    href: "https://mm-reformas-integrales.lovable.app",
+    href: "https://www.reformascompletas.com/",
   },
   {
     id: "project-2",
