@@ -23,7 +23,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     setMobileOpen(false);
-    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   return (
