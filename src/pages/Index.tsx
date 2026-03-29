@@ -184,7 +184,7 @@ const Index = () => {
               { icon: Monitor, title: "Imagen profesional", desc: "Un resultado visual que transmite seriedad, criterio y confianza desde el primer segundo." },
               { icon: Smartphone, title: "Pensada para móvil", desc: "Experiencia impecable en smartphone, que es donde tu cliente te encuentra primero." },
               { icon: MessageSquare, title: "Trato directo", desc: "Comunicación clara, sin intermediarios. Sabes en todo momento en qué punto está tu proyecto." },
-              { icon: ShieldCheck, title: "Acompañamiento real", desc: "No termina con la entrega. Mantenimiento, cambios y soporte anual para que tu web siga al día." },
+              { icon: ShieldCheck, title: "Acompañamiento real", desc: "No termina con la entrega. Mantenimiento, cambios y soporte para que tu web siga al día." },
             ].map((item, i) => (
               <motion.div
                 key={item.title}
