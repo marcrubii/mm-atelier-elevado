@@ -63,8 +63,9 @@ const Inversion = () => {
   return (
     <>
       {/* Header */}
-      <section className="pt-32 md:pt-40 pb-16 md:pb-20">
-        <div className="container-premium">
+      <section className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
+        <AnimatedBackground variant="cool" />
+        <div className="container-premium relative z-10">
           <AnimatedSection>
             <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Inversión</p>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground max-w-3xl">

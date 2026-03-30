@@ -106,6 +106,7 @@ const Proceso = () => {
         style={{ opacity: heroOpacity, scale: heroScale }}
         className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden"
       >
+        <AnimatedBackground variant="warm" />
         {/* Animated grid lines background */}
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(7)].map((_, i) => (
