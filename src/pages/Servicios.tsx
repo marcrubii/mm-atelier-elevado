@@ -212,7 +212,7 @@ const Servicios = () => {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-border section-padding relative overflow-hidden">
+      <section className="section-divider section-padding relative overflow-hidden">
         <AnimatedBackground variant="warm" />
         <div className="container-premium text-center relative z-10">
           <AnimatedSection>

@@ -210,7 +210,7 @@ const Inversion = () => {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-border section-padding">
+      <section className="section-divider section-padding">
         <div className="container-premium text-center">
           <AnimatedSection>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
