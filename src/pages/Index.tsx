@@ -90,7 +90,7 @@ const Index = () => {
       </section>
 
       {/* Problem / Value section */}
-      <section className="section-padding border-t border-border relative overflow-hidden">
+      <section className="section-padding section-divider relative overflow-hidden">
         <AnimatedBackground variant="warm" />
 
         <div className="container-premium relative z-10">
