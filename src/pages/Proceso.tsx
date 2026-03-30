@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import {
   ScrollXCarousel,
   ScrollXCarouselContainer,
