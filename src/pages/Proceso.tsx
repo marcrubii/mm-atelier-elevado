@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import {
   ScrollXCarousel,
   ScrollXCarouselContainer,
@@ -105,6 +106,7 @@ const Proceso = () => {
         style={{ opacity: heroOpacity, scale: heroScale }}
         className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden"
       >
+        <AnimatedBackground variant="warm" />
         {/* Animated grid lines background */}
         <div className="absolute inset-0 pointer-events-none">
           {[...Array(7)].map((_, i) => (
@@ -162,7 +164,8 @@ const Proceso = () => {
       </motion.section>
 
       {/* Interactive process — timeline with unique reveal */}
-      <section className="pb-16 md:pb-24">
+      <section className="pb-16 md:pb-24 relative overflow-hidden">
+        <AnimatedBackground variant="default" />
         <div className="container-premium">
           {/* Desktop: side-by-side with animated connector */}
           <div className="hidden md:grid grid-cols-[320px_1fr] lg:grid-cols-[380px_1fr] gap-12 lg:gap-20">

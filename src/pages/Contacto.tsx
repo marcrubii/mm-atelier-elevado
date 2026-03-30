@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Send } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import MapLibreGL from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
@@ -76,13 +77,7 @@ const Contacto = () => {
     <>
       {/* Header */}
       <section className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
-        {/* Ambient glow */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 0.2, scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="absolute -top-20 right-0 w-[500px] h-[500px] rounded-full bg-[hsl(var(--orange-subtle))] blur-[140px] pointer-events-none"
-        />
+        <AnimatedBackground variant="warm" />
 
         <div className="container-premium relative z-10">
           <motion.div
