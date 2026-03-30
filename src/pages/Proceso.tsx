@@ -164,7 +164,8 @@ const Proceso = () => {
       </motion.section>
 
       {/* Interactive process — timeline with unique reveal */}
-      <section className="pb-16 md:pb-24">
+      <section className="pb-16 md:pb-24 relative overflow-hidden">
+        <AnimatedBackground variant="default" />
         <div className="container-premium">
           {/* Desktop: side-by-side with animated connector */}
           <div className="hidden md:grid grid-cols-[320px_1fr] lg:grid-cols-[380px_1fr] gap-12 lg:gap-20">
