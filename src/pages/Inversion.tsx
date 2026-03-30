@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import { Check, Plus, Minus, Camera } from "lucide-react";
 import { useState } from "react";
 
