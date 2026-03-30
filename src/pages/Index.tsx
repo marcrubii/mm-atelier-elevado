@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import heroImage from "@/assets/hero-abstract.jpg";
 import { Monitor, Smartphone, MessageSquare, Palette, ShieldCheck } from "lucide-react";
 
@@ -90,14 +91,7 @@ const Index = () => {
 
       {/* Problem / Value section */}
       <section className="section-padding border-t border-border relative overflow-hidden">
-        {/* Animated background glow */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[hsl(var(--orange-subtle))] blur-[120px] opacity-30 pointer-events-none"
-        />
+        <AnimatedBackground variant="warm" />
 
         <div className="container-premium relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -151,18 +145,20 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Credibility pillars */}
+      {/* Credibility pillars — "Lo que nos define" */}
       <section className="section-padding relative overflow-hidden">
-        {/* Subtle animated gradient line across top */}
+        <AnimatedBackground variant="intense" />
+
+        {/* Animated gradient line */}
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent origin-left"
+          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent origin-left"
         />
 
-        <div className="container-premium">
+        <div className="container-premium relative z-10">
           <AnimatedSection className="text-center mb-16 md:mb-20">
             <motion.p
               initial={{ opacity: 0, letterSpacing: "0.1em" }}
@@ -178,7 +174,7 @@ const Index = () => {
             </h2>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5">
             {[
               { icon: Palette, title: "Diseño a medida", desc: "Cada web se diseña desde cero para tu negocio. Sin plantillas, sin soluciones genéricas." },
               { icon: Monitor, title: "Imagen profesional", desc: "Un resultado visual que transmite seriedad, criterio y confianza desde el primer segundo." },
@@ -192,16 +188,20 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ backgroundColor: "hsl(var(--card))", y: -4 }}
-                className="bg-background p-8 md:p-10 flex flex-col transition-shadow duration-300 hover:shadow-[0_0_30px_hsl(var(--orange-subtle))]"
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="relative group p-8 md:p-10 flex flex-col rounded-sm border border-border/60 bg-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_40px_hsl(24_90%_50%/0.15),0_0_80px_hsl(24_90%_50%/0.05)]"
               >
+                {/* Gradient top accent on hover */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary/80 transition-all duration-500" />
+
                 <motion.div
-                  whileHover={{ scale: 1.2, rotate: -5 }}
+                  whileHover={{ scale: 1.3, rotate: -8 }}
                   transition={{ type: "spring", stiffness: 300 }}
+                  className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300"
                 >
-                  <item.icon className="w-5 h-5 text-primary mb-6" strokeWidth={1.5} />
+                  <item.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
                 </motion.div>
-                <h3 className="font-heading text-sm font-semibold tracking-wide text-foreground mb-3">{item.title}</h3>
+                <h3 className="font-heading text-sm font-semibold tracking-wide text-foreground mb-3 group-hover:text-primary transition-colors duration-300">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
@@ -210,8 +210,9 @@ const Index = () => {
       </section>
 
       {/* CTA bottom */}
-      <section className="section-padding border-t border-border">
-        <div className="container-premium text-center">
+      <section className="section-padding border-t border-border relative overflow-hidden">
+        <AnimatedBackground variant="cool" />
+        <div className="container-premium text-center relative z-10">
           <AnimatedSection>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
               ¿Listo para tener la web
