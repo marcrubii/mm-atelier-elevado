@@ -81,7 +81,8 @@ const Inversion = () => {
       </section>
 
       {/* Pricing cards */}
-      <section className="pb-16 md:pb-24">
+      <section className="pb-16 md:pb-24 relative overflow-hidden">
+        <AnimatedBackground variant="warm" />
         <div className="container-premium">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Plan 1: Web personalizada */}
