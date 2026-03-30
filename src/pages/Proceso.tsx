@@ -335,7 +335,7 @@ const Proceso = () => {
       </section>
 
       {/* Portfolio showcase */}
-      <section className="border-t border-border section-padding">
+      <section className="section-divider section-padding">
         <div className="container-premium mb-12">
           <motion.div
             initial={{ opacity: 0 }}
@@ -397,7 +397,7 @@ const Proceso = () => {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-border section-padding">
+      <section className="section-divider section-padding">
         <div className="container-premium text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
