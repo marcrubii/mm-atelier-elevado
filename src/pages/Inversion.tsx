@@ -190,7 +190,7 @@ const Inversion = () => {
       </section>
 
       {/* FAQ */}
-      <section className="section-divider section-padding">
+      <section className="section-padding">
         <div className="container-premium max-w-3xl mx-auto">
           <AnimatedSection className="mb-12">
             <p className="font-heading text-xs tracking-[0.3em] uppercase text-primary mb-4">Preguntas frecuentes</p>
