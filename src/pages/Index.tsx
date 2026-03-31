@@ -201,7 +201,7 @@ const Index = () => {
       </section>
 
       {/* CTA bottom */}
-      <section className="section-padding section-divider relative overflow-hidden">
+      <section className="section-padding relative overflow-hidden">
         <AnimatedBackground variant="cool" />
         <div className="container-premium text-center relative z-10">
           <AnimatedSection>

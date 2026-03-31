@@ -121,7 +121,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </main>
 
       {/* Footer */}
-      <footer className="section-divider">
+      <footer>
         <div className="container-premium py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
             <div>

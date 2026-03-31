@@ -397,7 +397,7 @@ const Proceso = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-divider section-padding">
+      <section className="section-padding">
         <div className="container-premium text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
