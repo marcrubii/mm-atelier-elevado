@@ -130,13 +130,6 @@
     @apply relative;
   }
 
-  .section-divider::before {
-    content: '';
-    @apply absolute top-0 left-0 right-0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(24 85% 55% / 0.3) 30%, hsl(24 85% 55% / 0.15) 70%, transparent);
-  }
-
   .section-padding {
     @apply py-24 md:py-32 lg:py-40;
   }
