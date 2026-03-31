@@ -89,7 +89,7 @@ const Index = () => {
       </section>
 
       {/* Problem / Value section */}
-      <section className="section-padding section-divider relative overflow-hidden">
+      <section className="section-padding relative overflow-hidden">
         <AnimatedBackground variant="warm" />
 
         <div className="container-premium relative z-10">
@@ -148,8 +148,6 @@ const Index = () => {
       <section className="section-padding relative overflow-hidden">
         <AnimatedBackground variant="intense" />
 
-        {/* Subtle top glow */}
-        <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
 
         <div className="container-premium relative z-10">
           <AnimatedSection className="text-center mb-16 md:mb-20">
@@ -203,7 +201,7 @@ const Index = () => {
       </section>
 
       {/* CTA bottom */}
-      <section className="section-padding section-divider relative overflow-hidden">
+      <section className="section-padding relative overflow-hidden">
         <AnimatedBackground variant="cool" />
         <div className="container-premium text-center relative z-10">
           <AnimatedSection>
