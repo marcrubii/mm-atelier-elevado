@@ -156,17 +156,9 @@ const Servicios = () => {
       <section className="section-divider section-padding relative overflow-hidden">
         <AnimatedBackground variant="cool" />
 
-        {/* Decorative floating elements */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 right-1/4 w-64 h-64 border border-primary/5 rounded-full pointer-events-none"
-        />
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-1/4 left-1/3 w-48 h-48 border border-primary/5 rounded-full pointer-events-none"
-        />
+        {/* Decorative floating elements — CSS only */}
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 border border-primary/5 rounded-full pointer-events-none animate-[spin_60s_linear_infinite]" />
+        <div className="absolute bottom-1/4 left-1/3 w-48 h-48 border border-primary/5 rounded-full pointer-events-none animate-[spin_45s_linear_infinite_reverse]" />
 
         <div className="container-premium relative z-10">
           <AnimatedSection>
@@ -188,24 +180,18 @@ const Servicios = () => {
                 Si tu negocio no dispone de fotografías profesionales, también podemos ayudarte con el material visual necesario para que la web esté a la altura. Nos desplazamos y nos ocupamos de todo.
               </p>
 
-              {/* Decorative sparkles */}
-              <motion.div
-                className="flex items-center justify-center gap-3 mt-8"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
+              {/* Decorative sparkles — CSS only */}
+              <div className="flex items-center justify-center gap-3 mt-8">
                 {[0, 1, 2].map((i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
+                    className="animate-pulse"
+                    style={{ animationDelay: `${i * 400}ms`, animationDuration: '2s' }}
                   >
                     <Sparkles className="w-4 h-4 text-primary/50" />
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </AnimatedSection>
         </div>

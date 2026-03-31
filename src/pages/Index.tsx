@@ -81,10 +81,9 @@ const Index = () => {
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
           <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">Scroll</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-px h-6 bg-gradient-to-b from-primary/60 to-transparent"
+          <div
+            className="w-px h-6 bg-gradient-to-b from-primary/60 to-transparent animate-bounce"
+            style={{ animationDuration: '1.5s' }}
           />
         </motion.div>
       </section>
