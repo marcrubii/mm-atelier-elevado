@@ -156,17 +156,9 @@ const Servicios = () => {
       <section className="section-divider section-padding relative overflow-hidden">
         <AnimatedBackground variant="cool" />
 
-        {/* Decorative floating elements */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 right-1/4 w-64 h-64 border border-primary/5 rounded-full pointer-events-none"
-        />
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-1/4 left-1/3 w-48 h-48 border border-primary/5 rounded-full pointer-events-none"
-        />
+        {/* Decorative floating elements — CSS only */}
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 border border-primary/5 rounded-full pointer-events-none animate-[spin_60s_linear_infinite]" />
+        <div className="absolute bottom-1/4 left-1/3 w-48 h-48 border border-primary/5 rounded-full pointer-events-none animate-[spin_45s_linear_infinite_reverse]" />
 
         <div className="container-premium relative z-10">
           <AnimatedSection>
