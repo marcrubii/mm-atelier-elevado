@@ -31,7 +31,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-background/90 backdrop-blur-xl border-b border-border/50"
+            ? "bg-background/95 border-b border-border/30"
             : "bg-transparent"
         }`}
       >
