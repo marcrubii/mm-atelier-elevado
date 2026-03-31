@@ -147,7 +147,7 @@ const Servicios = () => {
       </section>
 
       {/* Photography note — Material visual */}
-      <section className="section-divider section-padding relative overflow-hidden">
+      <section className="section-padding relative overflow-hidden">
         <AnimatedBackground variant="cool" />
 
         {/* Decorative floating elements — CSS only */}
