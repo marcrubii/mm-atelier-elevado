@@ -148,14 +148,8 @@ const Index = () => {
       <section className="section-padding relative overflow-hidden">
         <AnimatedBackground variant="intense" />
 
-        {/* Animated gradient line */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent origin-left"
-        />
+        {/* Subtle top glow */}
+        <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
 
         <div className="container-premium relative z-10">
           <AnimatedSection className="text-center mb-16 md:mb-20">
