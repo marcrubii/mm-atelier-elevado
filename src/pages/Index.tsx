@@ -148,14 +148,8 @@ const Index = () => {
       <section className="section-padding relative overflow-hidden">
         <AnimatedBackground variant="intense" />
 
-        {/* Animated gradient line */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent origin-left"
-        />
+        {/* Subtle top glow */}
+        <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
 
         <div className="container-premium relative z-10">
           <AnimatedSection className="text-center mb-16 md:mb-20">
@@ -188,7 +182,7 @@ const Index = () => {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="relative group p-8 md:p-10 flex flex-col rounded-sm border border-border/60 bg-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_40px_hsl(24_90%_50%/0.15),0_0_80px_hsl(24_90%_50%/0.05)]"
+                className="relative group p-8 md:p-10 flex flex-col rounded-sm border border-border/60 bg-card/80 transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_40px_hsl(24_90%_50%/0.15)]"
               >
                 {/* Gradient top accent on hover */}
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary/80 transition-all duration-500" />

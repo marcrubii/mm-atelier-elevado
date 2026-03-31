@@ -31,7 +31,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-background/90 backdrop-blur-xl border-b border-border/50"
+            ? "bg-background/95 border-b border-border/30"
             : "bg-transparent"
         }`}
       >
@@ -83,7 +83,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-background/98 backdrop-blur-xl border-b border-border overflow-hidden"
+              className="md:hidden bg-background/98 border-b border-border/30 overflow-hidden"
             >
               <div className="container-premium py-6 flex flex-col gap-1">
                 {navItems.map((item) => (
@@ -155,7 +155,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <p className="mt-4 text-sm text-muted-foreground">Barcelona, España</p>
             </div>
           </div>
-          <div className="mt-16 pt-8 section-divider flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-muted-foreground">
               © {new Date().getFullYear()} M&M Studio. Todos los derechos reservados.
             </p>

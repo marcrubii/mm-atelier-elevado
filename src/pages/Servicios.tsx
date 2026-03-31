@@ -120,7 +120,7 @@ const Servicios = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 whileHover={{ y: -6, scale: 1.01 }}
-                className="relative flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[45vw] lg:w-[35vw] border border-border/60 bg-card/60 backdrop-blur-sm p-8 md:p-12 flex flex-col group hover:border-primary/40 transition-all duration-500 overflow-hidden"
+                className="relative flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[45vw] lg:w-[35vw] border border-border/60 bg-card/80 p-8 md:p-12 flex flex-col group hover:border-primary/40 transition-all duration-500 overflow-hidden"
               >
                 {/* Card gradient overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
