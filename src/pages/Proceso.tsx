@@ -335,7 +335,7 @@ const Proceso = () => {
       </section>
 
       {/* Portfolio showcase */}
-      <section className="section-divider section-padding">
+      <section className="section-padding">
         <div className="container-premium mb-12">
           <motion.div
             initial={{ opacity: 0 }}
