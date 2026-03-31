@@ -83,7 +83,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-background/98 backdrop-blur-xl border-b border-border overflow-hidden"
+              className="md:hidden bg-background/98 border-b border-border/30 overflow-hidden"
             >
               <div className="container-premium py-6 flex flex-col gap-1">
                 {navItems.map((item) => (
