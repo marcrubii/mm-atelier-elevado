@@ -51,12 +51,6 @@ const Servicios = () => {
         <AnimatedBackground variant="warm" />
 
         <div className="container-premium relative z-10">
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="h-px bg-gradient-to-r from-primary/60 via-primary/20 to-transparent mb-10 max-w-md"
-          />
           <motion.p
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
